@@ -32,12 +32,13 @@ shift $((OPTIND -1))
 # inside container image and exit.
 # We should be able to see local directory that contains the Mkdocs project.
 if [ "$produce" == "produce" ] ; then
-      docker run -d -v "$(pwd)/$path":/projects $image_name mkdocs new .
+      docker run -d -v "$(pwd)/$path":/projects $image_name produce
+      echo "Out to $(pwd)/$path/site.tar.gz"
       exit 0
 fi
 
 # If the parameter is serve then local directory which contains MkDocs project
 # will attached container image and run MkDocs project
 if [ "$serve" == "serve" ] ; then
-      docker run -p 8000:8000 -v "$(pwd)/$path":/projects $image_name mkdocs serve --dev-addr=0.0.0.0:8000
+      docker run -p 8000:8000 -v "$(pwd)/$path":/projects $image_name serve
 fi
