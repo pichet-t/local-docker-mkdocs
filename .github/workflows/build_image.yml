@@ -29,6 +29,6 @@ jobs:
           ls -lah $(pwd)/projects
       - name: Test Serve
         run: |          
-          docker run -p 8000:8000 -v "$(pwd)/projects":/projects mkdocs_local serve
+          docker run -d -p 8000:8000 -v "$(pwd)/projects":/projects mkdocs_local serve
           sleep 10
           curl -sSLi http://127.0.0.1:8000  | grep '200 OK'
