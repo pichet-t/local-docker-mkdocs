@@ -25,6 +25,7 @@ jobs:
       - name: Test Produce
         run: |
           docker run -d -v "$(pwd)/projects":/projects mkdocs_local produce
+          sleep 10
           ls -lah $(pwd)/projects
       - name: Test Serve
         run: |          
