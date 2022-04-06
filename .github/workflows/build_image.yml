@@ -25,7 +25,7 @@ jobs:
       - name: Test Produce
         run: |
           docker run -d -v "$(pwd)/projects":/projects mkdocs_local produce
-          tar -tf $(pwd)/projects/site.tar.gz
+          ls -lah $(pwd)/projects
       - name: Test Serve
         run: |          
           docker run -p 8000:8000 -v "$(pwd)/projects":/projects $image_name serve
