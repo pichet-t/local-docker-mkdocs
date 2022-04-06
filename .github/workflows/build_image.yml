@@ -22,7 +22,12 @@ jobs:
         run: |
           docker build -t mkdocs_local .
       # Runs a set of commands using the runners shell
-      - name: Test image
+      - name: Test Produce
         run: |
-          ls -lah
-          pwd
+          docker run -d -v "$(pwd)/projects":/projects mkdocs_local produce
+          tar -tf projects/site.tar.gz
+      - name: Test Serve
+        run: |          
+          docker run -p 8000:8000 -v "$(pwd)/$path":/projects $image_name serve
+          sleep 10
+          curl -sSLi http://127.0.0.1:8000  | grep '200 OK'
